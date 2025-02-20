@@ -6,4 +6,5 @@ export default {
   ellipsis: require("@/assets/images/ellipsis.png"),
   add: require("@/assets/images/add.png"),
   details: require("@/assets/images/details.png"),
+  react: require("@/assets/images/react-icon.png"),
 };

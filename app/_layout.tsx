@@ -39,7 +39,8 @@ export default function RootLayout() {
       <GestureHandlerRootView>
         <StatusBar style="auto" backgroundColor={Colors.light.primary} />
         <SafeAreaView />
-        <Stack>
+        <Stack initialRouteName="login">
+          <Stack.Screen name="login" options={{ headerShown: false }} />
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="+not-found" />
         </Stack>

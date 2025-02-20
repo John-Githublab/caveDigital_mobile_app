@@ -14,7 +14,8 @@ import {
 
 const Tasks = () => {
   const navigateToCratePage = () => {
-    router.push("/aevform/components/createandedit");
+    // router.push("/aevform/components/createandedit");
+    router.push("/login");
   };
 
   const navigateToDetails = (id?: number) => {

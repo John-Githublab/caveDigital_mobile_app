@@ -1,4 +1,4 @@
-import Statics from "@/app/(tabs)/tasks/components/Statics";
+import Statics from "@/screens/tasks/components/Statics";
 import FloatingButton from "@/components/buttons/FloatingButton";
 import Typography from "@/components/text/Text";
 import Images from "@/constants/Images";
@@ -14,12 +14,11 @@ import {
 
 const Tasks = () => {
   const navigateToCratePage = () => {
-    // router.push("/aevform/components/createandedit");
-    router.push("/login");
+    router.push("/(task)/create&edit");
   };
 
   const navigateToDetails = (id?: number) => {
-    router.push("/(tabs)/aevform/components/view");
+    router.push("/view");
   };
   return (
     <View style={styles.root}>

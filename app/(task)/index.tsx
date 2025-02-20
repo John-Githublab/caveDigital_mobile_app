@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
-import Tasks from "./tasks/tasks";
+import Tasks from "@/screens/tasks/tasks";
 
 export default function HomeScreen() {
   return (

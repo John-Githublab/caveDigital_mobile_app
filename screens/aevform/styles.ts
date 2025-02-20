@@ -29,6 +29,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     padding: 12,
     backgroundColor: Colors.light.background,
+    gap: 14,
   },
   description: {
     height: 100,
@@ -41,5 +42,11 @@ export const styles = StyleSheet.create({
   },
   button: {
     color: "white",
+    fontWeight: "700",
+  },
+  errorText: {
+    color: "red",
+    alignSelf: "flex-start",
+    marginBottom: 15,
   },
 });

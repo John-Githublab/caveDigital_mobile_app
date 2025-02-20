@@ -1,14 +1,12 @@
-import { View, Text, Image } from "react-native";
-import React from "react";
-import { styles } from "@/app/(tabs)/aevform/styles";
-import Images from "@/constants/Images";
-import Typography from "@/components/text/Text";
-import { ScrollView } from "react-native-gesture-handler";
 import StatusCapsule from "@/components/capsule/Capsule";
-import DropdownField from "@/components/forms/Dropdown";
-import Constants from "@/constants/Constants";
-import { getColorithStyle } from "@/utils/getColors";
+import Typography from "@/components/text/Text";
 import { Colors } from "@/constants/Colors";
+import Images from "@/constants/Images";
+import { styles } from "@/screens/aevform/styles";
+import { getColorithStyle } from "@/utils/getColors";
+import React from "react";
+import { Image, Text, View } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 
 const viewform = () => {
   let title = "Maintenance of Sewage plant";

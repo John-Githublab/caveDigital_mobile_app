@@ -9,6 +9,9 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/Ionicons";
 import validationSchema from "./config/Login.config";
 import { styles } from "./styles";
+import LocalStorage from "@/utils/LocalStorage";
+import ConfigAPIUrl from "@/constants/ConfigApiUrl";
+import APIRequest from "@/utils/ApiRequest";
 
 interface Form {
   email: string;
@@ -18,7 +21,7 @@ interface Form {
 const Login = () => {
   const [form, setForm] = useState<Form>();
   const { errors, getErrors } = useError(validationSchema);
-  const [showpassword, setShowPassword] = useState(false);
+  const [showpassword, setShowPassword] = useState(true);
 
   const handleChange = (key: string, value: any, e?: any) => {
     const data = value || e?.target?.value;
@@ -33,10 +36,21 @@ const Login = () => {
     router.push("/signup");
   };
 
-  const handleSubmit = () => {
+  const redirectUser = () => router.push("/(task)");
+
+  const handleSubmit = async () => {
     const hasError: boolean = getErrors(form);
     if (hasError) return;
     // submit the data
+    const response = await APIRequest.request("POST", ConfigAPIUrl.login, form);
+
+    if (!response) return;
+
+    const data: any = response?.data;
+    const result = data?.result;
+    LocalStorage.storeData("token", data?.token);
+    LocalStorage.storeData("user", result);
+    redirectUser();
   };
 
   return (

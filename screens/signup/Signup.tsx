@@ -4,17 +4,23 @@ import Images from "@/constants/Images";
 import useError from "@/hooks/useError";
 import { router } from "expo-router";
 import React, { useState } from "react";
-import { Image, Text, TextInput, View } from "react-native";
+import { Image, Text, TextInput, ToastAndroid, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/Ionicons";
 import AntDesignIcon from "react-native-vector-icons/AntDesign";
 import validationSchema from "./config/signup.config";
 import { styles } from "./styles";
+import LocalStorage from "@/utils/LocalStorage";
+import APIRequest from "@/utils/ApiRequest";
+import ConfigAPIUrl from "@/constants/ConfigApiUrl";
+import Toast from "react-native-toast-message";
+import { toast } from "@/utils/Toast";
 
 interface Form {
-  fullName: string;
-  email: string;
-  password: string;
+  fullName?: string;
+  email?: string;
+  password?: string;
+  first_name?: string;
 }
 
 const Signup = () => {
@@ -31,10 +37,24 @@ const Signup = () => {
     router.push("/login");
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const hasError: boolean = getErrors(form);
     if (hasError) return;
+    const formCopy = { ...form };
+    formCopy["first_name"] = form?.fullName;
     // submit the data
+    const response = await APIRequest.request(
+      "POST",
+      ConfigAPIUrl.register,
+      formCopy
+    );
+
+    if (!response) return;
+
+    const data: any = response?.data;
+    const result = data?.result;
+    toast("Successfully created User");
+    setForm({});
   };
 
   return (

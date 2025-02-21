@@ -1,5 +1,6 @@
 import ConfigAPIUrl from "@/constants/ConfigApiUrl";
 import APIRequest from "@/utils/ApiRequest";
+import { toast } from "@/utils/Toast";
 import { router } from "expo-router";
 import { useEffect, useState } from "react";
 
@@ -35,11 +36,12 @@ const useTaskForm = (record: string) => {
   const sendToServer = async (record: string, form: any) => {
     try {
       setIsSubmit(true);
+      const isEdit = record ? true : false;
       let url = ConfigAPIUrl.tasks;
       let method = "POST";
       let body = form;
 
-      if (record) {
+      if (isEdit) {
         url = ConfigAPIUrl.tasks + "/" + record;
         body = form;
         method = "PUT";
@@ -47,9 +49,10 @@ const useTaskForm = (record: string) => {
 
       const response = await APIRequest.request(method, url, body);
       if (!response) return;
-
+      toast(isEdit ? "Task updated successfully" : "Task created successfully");
       router.push("/(task)");
     } catch {
+      toast("An error occured");
     } finally {
       setIsSubmit(false);
     }

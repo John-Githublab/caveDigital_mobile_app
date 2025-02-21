@@ -23,7 +23,7 @@ const Authprovider = ({ children }: any) => {
       if (!response) return router.replace("/login");
       const data: any = response?.data;
       const result = data?.result;
-      setIsAuthenticated(true);
+      setIsAuthenticated(false);
       await LocalStorage.storeData("user", result);
     } catch {
     } finally {

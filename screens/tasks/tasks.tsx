@@ -1,24 +1,28 @@
-import Statics from "@/screens/tasks/components/Statics";
 import FloatingButton from "@/components/buttons/FloatingButton";
+import Br from "@/components/forms/Br";
 import Typography from "@/components/text/Text";
 import Images from "@/constants/Images";
+import Statics from "@/screens/tasks/components/Statics";
 import { router } from "expo-router";
 import React from "react";
 import { Image, View } from "react-native";
-import TaskCard from "./components/TaskCard";
-import { styles } from "./stylesheet/task";
 import {
   TouchableOpacity,
   TouchableWithoutFeedback,
 } from "react-native-gesture-handler";
+import TaskCard from "./components/TaskCard";
+import useTask from "./hooks/useTask";
+import { styles } from "./stylesheet/task";
 
 const Tasks = () => {
+  const { tasks } = useTask(true);
+
   const navigateToCratePage = () => {
     router.push("/(task)/create&edit");
   };
 
-  const navigateToDetails = (id?: number) => {
-    router.push("/view");
+  const navigateToDetails = (id: string) => {
+    router.push(`/view?record=${id}`);
   };
   return (
     <View style={styles.root}>
@@ -49,15 +53,25 @@ const Tasks = () => {
           Total Tasks{" "}
           <Typography style={{ color: "#868686" }}>( 10 Tasks )</Typography>
         </Typography>
-        <TouchableWithoutFeedback onPress={() => navigateToDetails()}>
-          <TaskCard
-            priority="High"
-            title="Maintenance of Sewage plant"
-            description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's Read more.."
-            status="Pending"
-            onPressed={navigateToCratePage}
-          />
-        </TouchableWithoutFeedback>
+        <View>
+          {tasks?.map((task) => (
+            <TaskCard key={task?._id}>
+              <TouchableWithoutFeedback
+                onPress={() => navigateToDetails(task?._id)}
+              >
+                <TaskCard.Status
+                  priority={task?.priority}
+                  status={task?.status}
+                />
+              </TouchableWithoutFeedback>
+              
+              <TaskCard.Details
+                title={task?.title}
+                description={task?.description}
+              />
+            </TaskCard>
+          ))}
+        </View>
       </View>
       <FloatingButton onPress={navigateToCratePage}>
         <Image style={{ width: 24, height: 24 }} source={Images.add} />

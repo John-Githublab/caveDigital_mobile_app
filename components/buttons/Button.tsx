@@ -1,16 +1,32 @@
 import { Colors } from "@/constants/Colors";
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  ActivityIndicator,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 interface Button {
   children: React.ReactNode;
   onClick?: () => void;
   style?: any;
   disabled?: boolean;
+  loaderColor?: string;
+  isLoading?: boolean;
 }
 
 const Button = (props: Button) => {
-  const { children, onClick, style, disabled, ...restProps } = props;
+  const {
+    children,
+    onClick,
+    style,
+    disabled,
+    loaderColor,
+    isLoading,
+    ...restProps
+  } = props;
   return (
     <TouchableOpacity
       disabled={disabled}
@@ -18,6 +34,9 @@ const Button = (props: Button) => {
       onPress={onClick}
       {...restProps}
     >
+      {isLoading ? (
+        <ActivityIndicator size="small" color={loaderColor || "white"} />
+      ) : null}
       {children}
     </TouchableOpacity>
   );

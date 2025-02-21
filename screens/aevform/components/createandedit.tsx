@@ -3,11 +3,13 @@ import DropdownField from "@/components/forms/Dropdown";
 import TextField from "@/components/forms/TextField";
 import Typography from "@/components/text/Text";
 import Constants from "@/constants/Constants";
-import useForm from "@/hooks/useForm";
-import { Text, View } from "react-native";
-import { styles } from "../styles";
 import useError from "@/hooks/useError";
+import useForm from "@/hooks/useForm";
+import { useEffect } from "react";
+import { ActivityIndicator, Text, View } from "react-native";
 import validationSchema from "../config/validation";
+import useTaskForm from "../hooks/useTaskForm";
+import { styles } from "../styles";
 
 interface Form {
   title?: string;
@@ -16,17 +18,29 @@ interface Form {
   priority?: string;
 }
 
-const Create = function () {
-  const { form, handleChange } = useForm<Form>({
+const Create = function ({ recordId, isEdit }: any) {
+  const { form, handleChange, setForm } = useForm<Form>({
     status: "pending",
     priority: "low",
   });
   const { errors, getErrors } = useError(validationSchema);
+  const { task, loading, sendToServer } = useTaskForm(isEdit ? recordId : null);
+
+  useEffect(() => {
+    // once gets the data if the record is found sets to the state
+    if (!task) return;
+    setForm({ ...task });
+  }, [JSON.stringify(task)]);
+
   const handleSubmit = () => {
     const hasError: boolean = getErrors(form);
     if (hasError) return;
     // submit the data
+
+    sendToServer(isEdit ? recordId : null, form);
   };
+
+  if (loading) return <ActivityIndicator size="large" />;
 
   return (
     <View style={styles.create_root}>
@@ -63,7 +77,9 @@ const Create = function () {
       />
       <View style={styles.buttonmain}>
         <Button onClick={handleSubmit}>
-          <Typography style={styles.button}>Save Details</Typography>
+          <Typography style={styles.button}>
+            {isEdit ? "Edit" : "Save"} Details
+          </Typography>
         </Button>
       </View>
     </View>

@@ -41,8 +41,8 @@ export default function RootLayout() {
           <SafeAreaView />
           <Toast />
           <Stack>
-            <Stack.Screen name="login" options={{ headerShown: false }} />
             <Stack.Screen name="(task)" options={{ headerShown: false }} />
+            <Stack.Screen name="login" options={{ headerShown: false }} />
             <Stack.Screen name="signup" options={{ headerShown: false }} />
             <Stack.Screen name="+not-found" />
           </Stack>

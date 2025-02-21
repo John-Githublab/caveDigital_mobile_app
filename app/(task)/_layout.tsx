@@ -16,9 +16,12 @@ export default function Applayout() {
         />
         <Stack.Screen
           name="create&edit"
-          options={{ header: TopHeader, headerTitle: "Create" }}
+          options={{ header: TopHeader, headerTitle: "Create Task" }}
         />
-        <Stack.Screen name="view" options={{ header: TopHeader }} />
+        <Stack.Screen
+          name="view"
+          options={{ header: TopHeader, headerTitle: "View Task" }}
+        />
       </Stack>
     </PrivateProvider>
   );

@@ -6,9 +6,9 @@ import { router } from "expo-router";
 const PrivateProvider = ({ children }: any) => {
   const { isAuthenticated } = useContext(Context);
 
-  //   useEffect(() => {
-  //     if (!isAuthenticated) router.push("/login");
-  //   }, [isAuthenticated]);
+  // useEffect(() => {
+  //   if (!isAuthenticated) router.push("/login");
+  // }, [isAuthenticated]);
 
   return <>{children}</>;
 };

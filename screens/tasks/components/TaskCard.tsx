@@ -5,28 +5,49 @@ import { Colors } from "@/constants/Colors";
 import Images from "@/constants/Images";
 import { getColorithStyle } from "@/utils/getColors";
 import React from "react";
-import { Image } from "react-native";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 
-interface TaskCard {
+interface TaskCardBottom {
   priority?: string;
   status: string;
-  title: string;
-  description: string;
-  onPressed: () => void;
+  children?: any;
 }
 
-const TaskCard = (props: TaskCard) => {
-  const { priority, status, title, description } = props;
+interface TaskCardTop {
+  title: string;
+  description: string;
+  onPressed?: () => void;
+}
+
+const TaskCard = (props: any) => {
+  const { children } = props;
+
+  return <View style={styles.root}>{children}</View>;
+};
+
+const BottomCard = (props: TaskCardBottom) => {
+  const { priority, status } = props;
 
   return (
-    <View style={styles.root}>
-      <View style={[styles.marginVertical, styles.flexRow]}>
-        <StatusCapsule>{priority}</StatusCapsule>
-        <Typography variant="medium" style={{ color: Colors.light.tint }}>
-          Status : <Text style={getColorithStyle(status)}>{status}</Text>
+    <View style={[styles.marginVertical, styles.flexRow]}>
+      <StatusCapsule>{priority}</StatusCapsule>
+      <Typography variant="medium" style={{ color: Colors.light.tint }}>
+        Status :{" "}
+        <Typography
+          style={{ ...getColorithStyle(status), textTransform: "capitalize" }}
+        >
+          {status}
         </Typography>
-      </View>
+      </Typography>
+    </View>
+  );
+};
+
+const TopCard = (props: TaskCardTop) => {
+  const { title, description } = props;
+
+  return (
+    <>
       <Br />
       <View style={[styles.marginVertical, styles.contents]}>
         <View style={styles.contents_area}>
@@ -37,7 +58,7 @@ const TaskCard = (props: TaskCard) => {
             {description}
           </Typography>
         </View>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => {}}>
           <Image
             style={styles.ellipsis}
             source={Images.ellipsis}
@@ -45,9 +66,12 @@ const TaskCard = (props: TaskCard) => {
           />
         </TouchableOpacity>
       </View>
-    </View>
+    </>
   );
 };
+
+TaskCard.Details = TopCard;
+TaskCard.Status = BottomCard;
 
 const styles = StyleSheet.create({
   root: {

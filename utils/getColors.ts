@@ -4,20 +4,20 @@ export const getColorithStyle = (status: string) => {
 
 export function getStatusColor(status: string) {
   switch (status) {
-    case "Pending":
+    case "pending":
       return "#ff8d00";
-    case "Assigned":
+    case "assigned":
       return "#1648CE";
-    case "Ongoing":
+    case "ongoing":
       return "#FF9500";
-    case "Completed":
+    case "completed":
       return "#009C3C";
-    case "Cancelled":
-    case "Rejected":
+    case "cancelled":
+    case "rejected":
       return "#FF0000";
-    case "PaymentNotDone":
+    case "paymentNotDone":
       return "#FFC107";
-    case "PaymentPending":
+    case "paymentPending":
       return "#FF9500";
     default:
       return "#000000"; // Default color (black) for unknown statuses

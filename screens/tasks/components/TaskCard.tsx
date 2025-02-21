@@ -1,11 +1,20 @@
 import StatusCapsule from "@/components/capsule/Capsule";
 import Br from "@/components/forms/Br";
+import List from "@/components/forms/List";
 import Typography from "@/components/text/Text";
 import { Colors } from "@/constants/Colors";
 import Images from "@/constants/Images";
 import { getColorithStyle } from "@/utils/getColors";
 import React from "react";
-import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
+import {
+  Button,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import Popover from "react-native-popover-view";
 
 interface TaskCardBottom {
   priority?: string;
@@ -17,6 +26,7 @@ interface TaskCardTop {
   title: string;
   description: string;
   onPressed?: () => void;
+  actions: any;
 }
 
 const TaskCard = (props: any) => {
@@ -44,7 +54,7 @@ const BottomCard = (props: TaskCardBottom) => {
 };
 
 const TopCard = (props: TaskCardTop) => {
-  const { title, description } = props;
+  const { title, description, actions } = props;
 
   return (
     <>
@@ -58,13 +68,20 @@ const TopCard = (props: TaskCardTop) => {
             {description}
           </Typography>
         </View>
-        <TouchableOpacity onPress={() => {}}>
-          <Image
-            style={styles.ellipsis}
-            source={Images.ellipsis}
-            alt="ellipis"
-          />
-        </TouchableOpacity>
+        <Popover
+          arrowSize={{ width: 0, height: 0 }}
+          from={
+            <TouchableOpacity>
+              <Image
+                style={styles.ellipsis}
+                source={Images.ellipsis}
+                alt="ellipis"
+              />
+            </TouchableOpacity>
+          }
+        >
+          <List lists={actions} />
+        </Popover>
       </View>
     </>
   );

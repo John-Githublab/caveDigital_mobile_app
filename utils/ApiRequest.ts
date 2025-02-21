@@ -2,7 +2,7 @@ import LocalStorage from "@/utils/LocalStorage";
 import { toast } from "./Toast";
 export interface ApiResponse {
   code: number;
-  data?: { responseCode: number; result: any };
+  data?: { responseCode: number; result: any; message: string };
   message?: string;
   [key: string]: any; // To handle additional properties in the API response
 }

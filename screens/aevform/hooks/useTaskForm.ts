@@ -25,6 +25,7 @@ const useTaskForm = (record: string) => {
         ConfigAPIUrl.tasks + "/" + record,
         ""
       );
+
       if (!response) return;
       setTask(response?.data?.result);
     } catch {

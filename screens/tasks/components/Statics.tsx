@@ -3,27 +3,32 @@ import { Image, ImageBackground, View } from "react-native";
 import { styles } from "../stylesheet/task";
 import Typography from "@/components/text/Text";
 import Images from "@/constants/Images";
+import { Statics } from "@/types/Task";
 
-const Statics = () => {
+interface Props {
+  statics?: Statics;
+}
+
+const StaticsUi = ({ statics }: Props) => {
   const status = useMemo(
     () => [
       {
         label: "Pending",
-        count: 10,
+        count: statics?.pending,
         background: Images.yellowbg,
       },
       {
         label: "Completed",
-        count: 10,
+        count: statics?.completed,
         background: Images.bluebg,
       },
       {
         label: "Cancelled",
-        count: 10,
+        count: statics?.cancelled,
         background: Images.redbg,
       },
     ],
-    []
+    [statics]
   );
 
   return (
@@ -51,4 +56,4 @@ const Statics = () => {
   );
 };
 
-export default Statics;
+export default StaticsUi;

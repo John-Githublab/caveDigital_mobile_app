@@ -19,4 +19,10 @@ export default {
       value: "high",
     },
   ],
+  staticsDefault: {
+    pending: 0,
+    completed: 0,
+    cancelled: 0,
+    total: 0,
+  },
 };

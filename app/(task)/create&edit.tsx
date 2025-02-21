@@ -6,7 +6,7 @@ const create = () => {
   const params = useLocalSearchParams();
   const record = params?.record;
 
-  return <CreateAndEdit recordId={record} isEdit={false} />;
+  return <CreateAndEdit recordId={record} isEdit={record ? true : false} />;
 };
 
 export default create;

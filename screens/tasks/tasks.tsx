@@ -2,9 +2,12 @@ import Button from "@/components/buttons/Button";
 import FloatingButton from "@/components/buttons/FloatingButton";
 import DataLoad from "@/components/loader/DataLoad";
 import Typography from "@/components/text/Text";
+import Constants from "@/constants/Constants";
 import Images from "@/constants/Images";
 import { Context } from "@/provider/Authprovider";
+import { useModal } from "@/provider/ConfirmationProvider";
 import Statics from "@/screens/tasks/components/Statics";
+import { Content } from "@/types/Modal";
 import { router } from "expo-router";
 import React from "react";
 import { Image, View } from "react-native";
@@ -30,6 +33,15 @@ const Tasks = () => {
   const navigateToDetails = (id: string) => router.push(`/view?record=${id}`);
 
   const { handleLogout, userDetails } = React.useContext(Context);
+
+  const [showModal] = useModal();
+
+  const handleShowModal = (id: string) => {
+    showModal({
+      ...Constants.modalConfig.delete,
+      handleConfirm: () => deleteRecord(id),
+    } as Content);
+  };
 
   return (
     <View style={styles.root}>
@@ -79,7 +91,7 @@ const Tasks = () => {
                     },
                     {
                       label: "Delete",
-                      onPress: () => deleteRecord(task?._id),
+                      onPress: () => handleShowModal(task?._id),
                     },
                   ]}
                 />

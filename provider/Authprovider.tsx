@@ -1,11 +1,14 @@
 import CenterLoader from "@/components/loader/CenterLoader";
 import ConfigAPIUrl from "@/constants/ConfigApiUrl";
+import Constants from "@/constants/Constants";
+import { Content } from "@/types/Modal";
 import { User } from "@/types/User";
 import APIRequest from "@/utils/ApiRequest";
 import LocalStorage from "@/utils/LocalStorage";
 import { toast } from "@/utils/Toast";
 import { router } from "expo-router";
 import React, { useEffect, useState } from "react";
+import { useModal } from "./ConfirmationProvider";
 
 export const Context = React.createContext<any>({});
 
@@ -13,6 +16,7 @@ const Authprovider = ({ children }: any) => {
   const [loading, setLoading] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userDetails, setUserDetails] = useState<User | null>();
+  const [showModal] = useModal();
 
   useEffect(() => {
     checkAuthenticated();
@@ -39,12 +43,19 @@ const Authprovider = ({ children }: any) => {
     }
   };
 
-  const handleLogout = async () => {
+  const logout = async () => {
     await LocalStorage.removeData("user");
     await LocalStorage.removeData("token");
     setUserDetails(null);
     toast("Logged out successfully");
     router.push("/login");
+  };
+
+  const handleLogout = () => {
+    showModal({
+      ...Constants.modalConfig.logout,
+      handleConfirm: logout,
+    } as Content);
   };
 
   return (

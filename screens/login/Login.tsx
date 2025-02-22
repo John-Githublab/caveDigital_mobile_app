@@ -30,13 +30,9 @@ const Login = () => {
     setForm((p: any) => ({ ...p, [key]: data }));
   };
 
-  const handleNavigateTosignup = () => {
-    router.push("/signup");
-  };
+  const handleNavigateTosignup = () => router.push("/signup");
 
-  const handleNavigateToFogotPassword = () => {
-    router.push("/signup");
-  };
+  const handleNavigateToFogotPassword = () => router.push("/forgotpassword");
 
   const redirectUser = () => router.push("/(task)");
 

@@ -5,7 +5,7 @@ import useError from "@/hooks/useError";
 import { router } from "expo-router";
 import React, { useState } from "react";
 import { Image, Text, TextInput, ToastAndroid, View } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/Ionicons";
 import AntDesignIcon from "react-native-vector-icons/AntDesign";
 import validationSchema from "./config/signup.config";
@@ -67,7 +67,7 @@ const Signup = () => {
           Create an account with basic details
         </Typography>
       </View>
-      <>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.inputContainer}>
           <AntDesignIcon name="user" size={25} style={styles.icon} />
           <TextInput
@@ -124,7 +124,7 @@ const Signup = () => {
             <Text style={styles.signUpLink}>Login</Text>
           </Text>
         </TouchableOpacity>
-      </>
+      </ScrollView>
     </View>
   );
 };

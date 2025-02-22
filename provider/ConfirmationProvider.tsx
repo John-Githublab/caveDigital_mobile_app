@@ -28,7 +28,7 @@ export const ConfirmationProvider = ({ children }: any) => {
   return (
     <ModalContext.Provider value={[showModal, hideModal, visible]}>
       {children}
-      <Dialog visible={visible} title={modalContent?.title || ""}>
+      <Dialog visible={visible} title={modalContent?.title || ""} hideModal={hideModal}>
         <Typography variant="medium" style={styles.headerText}>
           {modalContent?.description}
         </Typography>
@@ -62,11 +62,11 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   actionYes: {
-    color: "#FF0000",
     fontWeight: "bold",
+    color: "#009C3C",
   },
   actionNo: {
-    color: "#009C3C",
+    color: "#FF0000",
     fontWeight: "bold",
   },
 });

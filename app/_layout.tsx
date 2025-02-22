@@ -15,6 +15,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Authprovider from "@/provider/Authprovider";
 import Toast from "react-native-toast-message";
 import { ConfirmationProvider } from "@/provider/ConfirmationProvider";
+import TopHeader from "@/components/layout/TopHeader";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -46,6 +47,19 @@ export default function RootLayout() {
               <Stack.Screen name="(task)" options={{ headerShown: false }} />
               <Stack.Screen name="login" options={{ headerShown: false }} />
               <Stack.Screen name="signup" options={{ headerShown: false }} />
+              <Stack.Screen
+                name="forgotpassword"
+                options={{
+                  headerShown: true,
+                  header: (props) => (
+                    <TopHeader
+                      {...props}
+                      style={{ backgroundColor: "white" }}
+                      iconColor={"black"}
+                    />
+                  ),
+                }}
+              />
               <Stack.Screen name="+not-found" />
             </Stack>
           </GestureHandlerRootView>

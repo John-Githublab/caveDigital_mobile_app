@@ -47,19 +47,21 @@ const Create = function ({ recordId, isEdit }: any) {
       <TextField
         label={"Title"}
         value={form?.title}
-        placeholder={"Enter Title"}
+        placeholder={""}
         onChange={handleChange("title")}
+        required={true}
       />
       {errors?.title && <Text style={styles.errorText}>{errors?.title}</Text>}
 
       <TextField
         label={"Description"}
-        placeholder={"Please enter description"}
+        placeholder={"Type here"}
         value={form?.description}
         onChange={handleChange("description")}
         style={styles.description}
         multiline={true}
         numberOfLines={4}
+        required={true}
       />
       {errors?.description && (
         <Text style={styles.errorText}>{errors?.description}</Text>
@@ -79,6 +81,7 @@ const Create = function ({ recordId, isEdit }: any) {
         label="Priority"
         value={form?.priority}
         onChange={handleChange("priority")}
+        required={true}
       />
       <View style={styles.buttonmain}>
         <Button onClick={handleSubmit}>

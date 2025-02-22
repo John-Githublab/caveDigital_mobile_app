@@ -1,12 +1,12 @@
 import { Colors } from "@/constants/Colors";
 import React, { ReactNode } from "react";
-import { Text } from "react-native";
 import { Modal, StyleSheet, View } from "react-native";
 import Typography from "../text/Text";
+import Icon from "react-native-vector-icons/AntDesign";
 
 interface Dialog {
   visible: boolean;
-  hideModal?: () => void;
+  hideModal: () => void;
   children?: ReactNode;
   title: string;
 }
@@ -25,6 +25,7 @@ const Dialog = ({ visible, hideModal, children, title }: Dialog) => {
             <Typography variant="medium" style={styles.headerText}>
               {title}
             </Typography>
+            <Icon onPress={hideModal} color={"white"} name="close" size={22} />
           </View>
           <View style={styles.modalView}>{children}</View>
         </View>
@@ -43,7 +44,7 @@ const styles = StyleSheet.create({
   modalView: {
     backgroundColor: "white",
     padding: 20,
-    width:"90%"
+    width: "90%",
   },
   button: {
     marginTop: 10,
@@ -76,6 +77,8 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.light.primary,
     paddingVertical: 10,
     paddingHorizontal: 20,
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   headerText: {
     color: "white",

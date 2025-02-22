@@ -64,6 +64,7 @@ const Tasks = () => {
         <ScrollView
           alwaysBounceVertical={true}
           scrollEnabled={true}
+          showsVerticalScrollIndicator={false}
           contentContainerStyle={styles.taskContainer}
           refreshControl={
             <RefreshControl refreshing={loading} onRefresh={getTaskDetails} />

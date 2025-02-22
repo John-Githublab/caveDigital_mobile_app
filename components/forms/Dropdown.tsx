@@ -1,6 +1,6 @@
 import { Picker } from "@react-native-picker/picker";
 import React from "react";
-import { StyleSheet, View, ViewStyle } from "react-native";
+import { StyleSheet, Text, View, ViewStyle } from "react-native";
 import Typography from "../text/Text";
 
 interface DropdownFieldProps {
@@ -9,6 +9,7 @@ interface DropdownFieldProps {
   onChange?: (value: string) => void;
   options: { label: string; value: string }[];
   style?: ViewStyle;
+  required?: boolean;
 }
 
 const DropdownField: React.FC<DropdownFieldProps> = ({
@@ -16,13 +17,14 @@ const DropdownField: React.FC<DropdownFieldProps> = ({
   value,
   onChange,
   options = [],
+  required = false,
   ...restProps
 }) => {
   return (
     <View {...restProps}>
       <View style={styles.labelContainer}>
         <Typography variant="medium" style={styles.text}>
-          {label}
+          {label} {required ? <Text style={styles.required}>*</Text> : null}
         </Typography>
       </View>
       <View style={styles.dropdownContainer}>
@@ -56,7 +58,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   picker: {
-    color: "black",
+    color: "#868686",
     backgroundColor: "white",
   },
   text: {
@@ -66,6 +68,9 @@ const styles = StyleSheet.create({
   pickerItem: {
     fontSize: 14,
     color: "#868686",
+  },
+  required: {
+    color: "#FF0000",
   },
 });
 

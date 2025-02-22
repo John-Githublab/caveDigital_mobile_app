@@ -6,12 +6,12 @@ import Typography from "../text/Text";
 
 const TopHeader = (props: any) => {
   return (
-    <View style={styles.root}>
+    <View style={[styles.root,props?.style]}>
       <Ionicons
         onPress={props.navigation?.goBack}
         size={20}
         name="chevron-back"
-        color={"white"}
+        color={props?.iconColor || "white"}
       />
       <Typography variant="medium" style={styles.backtext}>
         {props?.options?.headerTitle}

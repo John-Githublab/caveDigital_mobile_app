@@ -1,6 +1,6 @@
 import Typography from "@/components/text/Text";
 import { Colors } from "@/constants/Colors";
-import { StyleSheet, TextInput, View } from "react-native";
+import { StyleSheet, Text, TextInput, View } from "react-native";
 
 const TextField = ({
   placeholder,
@@ -8,13 +8,14 @@ const TextField = ({
   type = "default",
   value,
   onChange,
+  required,
   ...restProps
 }) => {
   return (
     <View>
       <View style={style.label}>
         <Typography style={style.text} variant="medium">
-          {label}
+          {label} {required ? <Text style={style.required}>*</Text> : null}
         </Typography>
       </View>
       <View style={style.textContainer}>
@@ -52,7 +53,10 @@ const style = StyleSheet.create({
   },
   text: {
     fontWeight: "700",
-    color:"#323130"
+    color: "#323130",
+  },
+  required: {
+    color: "#FF0000",
   },
 });
 

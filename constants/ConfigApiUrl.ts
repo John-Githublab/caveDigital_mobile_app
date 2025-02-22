@@ -6,6 +6,7 @@ class ConfigAPIUrl {
   static register = this.baseUrl + "/auth/signup"; //post
   static islogin = this.baseUrl + "/islogin"; //get
   static tasks = this.baseUrl + "/tasks";
+  static triggerMail = this.baseUrl + "/trigger/email";
 }
 
 export default ConfigAPIUrl;

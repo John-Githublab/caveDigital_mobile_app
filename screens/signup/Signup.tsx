@@ -54,7 +54,7 @@ const Signup = () => {
 
     if (!response) return;
 
-    toast("Successfully created User");
+    toast(response?.data?.message || "");
     setForm({});
     handleNavigateTosignin();
   };

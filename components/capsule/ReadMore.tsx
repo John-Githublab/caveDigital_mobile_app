@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Typography from "../text/Text";
 
 interface ReadMoreProps {
@@ -20,14 +20,14 @@ const ReadMore: React.FC<ReadMoreProps> = ({ text, maxLength = 100 }) => {
         style={[{ color: "#383838", textAlign: "justify" }]}
       >
         {expanded || !isTruncated ? text : `${text.slice(0, maxLength)}...`}
+        {isTruncated && (
+          <TouchableOpacity style={styles.readButton} onPress={switchTruncate}>
+            <Text style={[styles.readMore, expanded ? {} : styles.expand]}>
+              {expanded ? "Read Less" : "Read More"}
+            </Text>
+          </TouchableOpacity>
+        )}
       </Typography>
-      {isTruncated && (
-        <TouchableOpacity style={styles.readButton} onPress={switchTruncate}>
-          <Text style={styles.readMore}>
-            {expanded ? "Read Less" : "Read More"}
-          </Text>
-        </TouchableOpacity>
-      )}
     </View>
   );
 };
@@ -35,8 +35,13 @@ const ReadMore: React.FC<ReadMoreProps> = ({ text, maxLength = 100 }) => {
 const styles = StyleSheet.create({
   root: {},
   readMore: {
-    fontSize: 14,
+    fontSize: 13,
     color: "#FF6667",
+    position: "relative",
+  },
+  expand: {
+    top: 5,
+    left: -25,
   },
   readButton: {
     marginTop: 2,

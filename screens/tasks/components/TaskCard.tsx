@@ -1,8 +1,10 @@
 import StatusCapsule from "@/components/capsule/Capsule";
+import ReadMore from "@/components/capsule/ReadMore";
 import Br from "@/components/forms/Br";
 import List from "@/components/forms/List";
 import Typography from "@/components/text/Text";
 import { Colors } from "@/constants/Colors";
+import Constants from "@/constants/Constants";
 import Images from "@/constants/Images";
 import { getColorithStyle } from "@/utils/getColors";
 import React, { useState } from "react";
@@ -10,7 +12,7 @@ import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 import Popover from "react-native-popover-view";
 
 interface TaskCardBottom {
-  priority?: string;
+  priority: string;
   status: string;
   children?: any;
 }
@@ -29,11 +31,16 @@ const TaskCard = (props: any) => {
 };
 
 const BottomCard = (props: TaskCardBottom) => {
-  const { priority, status } = props;
+  const { priority = "low", status } = props;
 
   return (
     <View style={[styles.marginVertical, styles.flexRow]}>
-      <StatusCapsule>{priority}</StatusCapsule>
+      <StatusCapsule
+        bg={Constants.priorityColors[priority].bg}
+        color={Constants.priorityColors[priority].color}
+      >
+        {priority}
+      </StatusCapsule>
       <Typography variant="medium" style={{ color: Colors.light.tint }}>
         Status :{" "}
         <Typography
@@ -62,12 +69,8 @@ const TopCard = (props: TaskCardTop) => {
           <Typography variant="medium" style={{ fontWeight: "700" }}>
             {title}
           </Typography>
-          <Typography
-            variant="small"
-            style={{ color: "#383838", textAlign: "justify" }}
-          >
-            {description}
-          </Typography>
+
+          <ReadMore text={description} />
         </View>
         <Popover
           arrowSize={{ width: 0, height: 0 }}

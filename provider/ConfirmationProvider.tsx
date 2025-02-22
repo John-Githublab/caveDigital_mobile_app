@@ -28,19 +28,23 @@ export const ConfirmationProvider = ({ children }: any) => {
   return (
     <ModalContext.Provider value={[showModal, hideModal, visible]}>
       {children}
-      <Dialog visible={visible} title={modalContent?.title || ""} hideModal={hideModal}>
+      <Dialog
+        visible={visible}
+        title={modalContent?.title || ""}
+        hideModal={hideModal}
+      >
         <Typography variant="medium" style={styles.headerText}>
           {modalContent?.description}
         </Typography>
         <View style={styles.actions}>
-          <TouchableWithoutFeedback onPress={handleConfirm}>
-            <Typography variant="medium" style={styles.actionYes}>
-              Yes
-            </Typography>
-          </TouchableWithoutFeedback>
           <TouchableWithoutFeedback onPress={hideModal}>
             <Typography variant="medium" style={styles.actionNo}>
               No
+            </Typography>
+          </TouchableWithoutFeedback>
+          <TouchableWithoutFeedback onPress={handleConfirm}>
+            <Typography variant="medium" style={styles.actionYes}>
+              Yes
             </Typography>
           </TouchableWithoutFeedback>
         </View>

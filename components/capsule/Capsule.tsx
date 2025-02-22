@@ -5,12 +5,17 @@ import Typography from "../text/Text";
 interface StatusCapsule {
   color?: string;
   children: React.ReactNode;
+  bg?: string;
 }
 
-const StatusCapsule = ({ children, color = "#E961611A" }: StatusCapsule) => {
+const StatusCapsule = ({
+  children,
+  bg = "#E961611A",
+  color = "#E6FFE8",
+}: StatusCapsule) => {
   return (
-    <View style={[styles.capsule, { backgroundColor: color }]}>
-      <Typography variant="small" style={styles.text}>
+    <View style={[styles.capsule, { backgroundColor: bg }]}>
+      <Typography variant="small" style={[styles.text, { color: color }]}>
         {children}
       </Typography>
     </View>

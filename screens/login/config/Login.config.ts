@@ -13,6 +13,7 @@ const validationSchema: Record<string, FieldValidation> = {
       },
     ],
   },
+
   password: {
     required: {
       value: true,

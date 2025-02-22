@@ -27,6 +27,7 @@ const Signup = () => {
   const [form, setForm] = useState<Form>();
   const { errors, getErrors } = useError(validationSchema);
   const [showpassword, setShowPassword] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (key: string, value: any, e?: any) => {
     const data = value || e?.target?.value;
@@ -43,16 +44,16 @@ const Signup = () => {
     const formCopy = { ...form };
     formCopy["first_name"] = form?.fullName;
     // submit the data
+    setIsLoading(true);
     const response = await APIRequest.request(
       "POST",
       ConfigAPIUrl.register,
       formCopy
     );
+    setIsLoading(false);
 
     if (!response) return;
 
-    const data: any = response?.data;
-    const result = data?.result;
     toast("Successfully created User");
     setForm({});
     handleNavigateTosignin();
@@ -115,7 +116,12 @@ const Signup = () => {
           <Text style={styles.errorText}>{errors?.password}</Text>
         )}
 
-        <Button style={styles.button} onClick={handleSubmit}>
+        <Button
+          isLoading={isLoading}
+          disabled={isLoading}
+          style={styles.button}
+          onClick={handleSubmit}
+        >
           <Text style={styles.buttonText}>Sign up</Text>
         </Button>
         <TouchableOpacity onPress={handleNavigateTosignin}>

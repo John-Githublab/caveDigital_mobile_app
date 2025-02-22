@@ -25,7 +25,23 @@ const useError = (schema: Record<string, FieldValidation>) => {
           if (errorsCopy[key]) return;
         });
       }
+      // min char validation
 
+      if (element?.minChar?.value) {
+        errorsCopy[key] =
+          state?.[key]?.length >= element?.minChar?.value
+            ? ""
+            : element?.minChar?.message;
+        if (errorsCopy[key]) return;
+      }
+      // max char validation
+      if (element?.maxChar?.value) {
+        errorsCopy[key] =
+          state?.[key]?.length <= element?.maxChar?.value
+            ? ""
+            : element?.maxChar?.message;
+        if (errorsCopy[key]) return;
+      }
       // other validation fn goes here
     });
 

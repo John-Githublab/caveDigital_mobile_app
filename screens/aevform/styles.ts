@@ -26,10 +26,10 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   create_root: {
-    flex: 1,
     padding: 12,
     backgroundColor: Colors.light.background,
     gap: 14,
+    flexGrow: 1,
   },
   description: {
     backgroundColor: "white",

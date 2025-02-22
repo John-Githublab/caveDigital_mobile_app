@@ -24,6 +24,7 @@ const Login = () => {
   const { errors, getErrors } = useError(validationSchema);
   const [showpassword, setShowPassword] = useState(true);
   const { setIsAuthenticated, setUserDetails } = React.useContext(Context);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (key: string, value: any, e?: any) => {
     const data = value || e?.target?.value;
@@ -39,8 +40,10 @@ const Login = () => {
   const handleSubmit = async () => {
     const hasError: boolean = getErrors(form);
     if (hasError) return;
+    setIsLoading(true);
     // submit the data
     const response = await APIRequest.request("POST", ConfigAPIUrl.login, form);
+    setIsLoading(false);
 
     if (!response) return;
     const data: any = response?.data;
@@ -98,7 +101,12 @@ const Login = () => {
         >
           <Text style={styles.forgotPassword}>Forgot Password?</Text>
         </TouchableOpacity>
-        <Button style={styles.button} onClick={handleSubmit}>
+        <Button
+          isLoading={isLoading}
+          style={styles.button}
+          onClick={handleSubmit}
+          disabled={isLoading}
+        >
           <Text style={styles.buttonText}>Login</Text>
         </Button>
         <TouchableOpacity onPress={handleNavigateTosignup}>

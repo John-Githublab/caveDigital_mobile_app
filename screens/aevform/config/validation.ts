@@ -7,6 +7,14 @@ const validationSchema: Record<string, FieldValidation> = {
       value: true,
       message: "Title is a required field",
     },
+    minChar: {
+      value: 2,
+      message: "Minimum 1 charecters is required",
+    },
+    maxChar: {
+      value: 20,
+      message: "Maximum 20 charecters is only allowed",
+    },
   },
   description: {
     required: {

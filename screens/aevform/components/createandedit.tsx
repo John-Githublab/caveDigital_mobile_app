@@ -10,6 +10,7 @@ import { ActivityIndicator, Text, View } from "react-native";
 import validationSchema from "../config/validation";
 import useTaskForm from "../hooks/useTaskForm";
 import { styles } from "../styles";
+import { ScrollView } from "react-native-gesture-handler";
 
 interface Form {
   title?: string;
@@ -43,7 +44,7 @@ const Create = function ({ recordId, isEdit }: any) {
   if (loading) return <ActivityIndicator size="large" />;
 
   return (
-    <View style={styles.create_root}>
+    <ScrollView contentContainerStyle={styles.create_root}>
       <TextField
         label={"Title"}
         value={form?.title}
@@ -88,7 +89,7 @@ const Create = function ({ recordId, isEdit }: any) {
           <Typography style={styles.button}>Save Details</Typography>
         </Button>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

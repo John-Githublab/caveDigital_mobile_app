@@ -6,6 +6,14 @@ export default {
       label: "Pending",
       value: "pending",
     },
+    {
+      label: "Completed",
+      value: "completed",
+    },
+    {
+      label: "Cancelled",
+      value: "cancelled",
+    },
   ],
   priority: [
     {
@@ -37,4 +45,18 @@ export default {
       description: `You might be logged out of the application. Do you still want to Logout ?`,
     } as Content,
   },
+  priorityColors: {
+    low: {
+      bg: "#E6FFE8",
+      color: "#2ACB3A",
+    },
+    medium: {
+      color: "#1EA5FC",
+      bg: "#EBF7FF",
+    },
+    high: {
+      color: "#FF0001",
+      bg: "#FFF3F3",
+    },
+  } as any,
 };

@@ -2,7 +2,7 @@ import { View, Text, StyleSheet } from "react-native";
 import React from "react";
 
 const Br = () => {
-  return <View style={styles.root}></View>;
+  return <View style={styles.root} />;
 };
 
 const styles = StyleSheet.create({

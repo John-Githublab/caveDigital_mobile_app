@@ -51,6 +51,7 @@ export const styles = StyleSheet.create({
   input: {
     height: "100%",
     color: "black",
+    width: "92%",
   },
   forgotmain: {
     display: "flex",

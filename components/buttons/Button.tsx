@@ -15,6 +15,7 @@ interface Button {
   disabled?: boolean;
   loaderColor?: string;
   isLoading?: boolean;
+  activeOpacity?: number;
 }
 
 const Button = (props: Button) => {

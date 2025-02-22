@@ -1,13 +1,7 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  TextStyle,
-  TouchableOpacity,
-} from "react-native";
 import React from "react";
-import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import { StyleSheet, TextStyle, TouchableOpacity, View } from "react-native";
 import Typography from "../text/Text";
+import Br from "./Br";
 
 interface ListDetails {
   label: string;
@@ -22,11 +16,12 @@ export interface List {
 const List = ({ lists, textStyle }: List) => {
   return (
     <View style={styles.root}>
-      {lists?.map((list) => (
+      {lists?.map((list, key) => (
         <TouchableOpacity onPress={list?.onPress} key={list?.label}>
           <Typography style={[styles.label, textStyle]}>
             {list?.label}
           </Typography>
+          {lists?.length - 1 !== key && <Br />}
         </TouchableOpacity>
       ))}
     </View>
@@ -36,12 +31,12 @@ const List = ({ lists, textStyle }: List) => {
 const styles = StyleSheet.create({
   root: {
     backgroundColor: "white",
-    paddingRight: 20,
-    paddingVertical: 10,
-    paddingLeft: 10,
     gap: 10,
   },
   label: {
+    paddingTop: 6,
+    paddingBottom: 7,
+    paddingHorizontal: 20,
     fontWeight: 600,
   },
 });

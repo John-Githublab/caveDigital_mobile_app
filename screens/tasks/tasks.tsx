@@ -1,10 +1,7 @@
 import FloatingButton from "@/components/buttons/FloatingButton";
 import Typography from "@/components/text/Text";
-import ConfigAPIUrl from "@/constants/ConfigApiUrl";
 import Images from "@/constants/Images";
 import Statics from "@/screens/tasks/components/Statics";
-import APIRequest from "@/utils/ApiRequest";
-import { toast } from "@/utils/Toast";
 import { router } from "expo-router";
 import React from "react";
 import { Image, View } from "react-native";
@@ -17,26 +14,23 @@ import {
 import TaskCard from "./components/TaskCard";
 import useTask from "./hooks/useTask";
 import { styles } from "./stylesheet/task";
+import { Context } from "@/provider/Authprovider";
+import { getGreeting } from "@/utils/Helpers";
+import DataLoad from "@/components/loader/DataLoad";
+import Button from "@/components/buttons/Button";
 
 const Tasks = () => {
-  const { tasks, statics, getTaskDetails, loading } = useTask(true);
+  const { tasks, statics, getTaskDetails, loading, deleteRecord } =
+    useTask(true);
 
   const navigateToEditPage = (id?: string) =>
     router.push(`/(task)/create&edit?record=${id}`);
 
-  const navigateToCratePage = () => router.push(`/(task)/create&edit`);
+  const navigateToCreatePage = () => router.push(`/(task)/create&edit`);
 
   const navigateToDetails = (id: string) => router.push(`/view?record=${id}`);
 
-  const deleteRecord = async (record: string) => {
-    const response = await APIRequest.request(
-      "DELETE",
-      ConfigAPIUrl.tasks + "/" + record,
-      ""
-    );
-    toast(response?.data?.message || "");
-    getTaskDetails();
-  };
+  const { handleLogout, userDetails } = React.useContext(Context);
 
   return (
     <View style={styles.root}>
@@ -44,16 +38,16 @@ const Tasks = () => {
         <View style={styles.invite}>
           <View>
             <Typography variant="small" style={{ color: "white" }}>
-              Good Morning
+              {getGreeting()}
             </Typography>
             <Typography
               variant="large"
               style={{ color: "white", marginTop: 4 }}
             >
-              Omar Faruukh
+              {userDetails?.first_name}
             </Typography>
           </View>
-          <TouchableOpacity style={styles.logout__frame}>
+          <TouchableOpacity onPress={handleLogout} style={styles.logout__frame}>
             <Image style={styles.logout__icon} source={Images.logout} />
           </TouchableOpacity>
         </View>
@@ -70,22 +64,24 @@ const Tasks = () => {
           </Typography>
         </Typography>
         <ScrollView
-          style={{ height: "100%" }}
+          style={styles.taskContainer}
+          contentContainerStyle={styles.taskContainer}
           refreshControl={
             <RefreshControl refreshing={loading} onRefresh={getTaskDetails} />
           }
         >
           {tasks?.map((task) => (
-            <TouchableWithoutFeedback
+            <Button
+              style={styles.card}
               key={task?._id}
-              // onPress={() => navigateToDetails(task?._id)}
+              onClick={() => navigateToDetails(task?._id)}
+              activeOpacity={1}
             >
               <TaskCard>
                 <TaskCard.Status
                   priority={task?.priority}
                   status={task?.status}
                 />
-
                 <TaskCard.Details
                   title={task?.title}
                   description={task?.description}
@@ -101,11 +97,14 @@ const Tasks = () => {
                   ]}
                 />
               </TaskCard>
-            </TouchableWithoutFeedback>
+            </Button>
           ))}
         </ScrollView>
+        {!loading && tasks?.length === 0 && (
+          <DataLoad message="Create some task " />
+        )}
       </View>
-      <FloatingButton onPress={navigateToCratePage}>
+      <FloatingButton onPress={navigateToCreatePage}>
         <Image style={{ width: 24, height: 24 }} source={Images.add} />
         <Typography style={{ color: "white", fontWeight: 700 }}>
           Create

@@ -58,17 +58,22 @@ const Create = function ({ recordId, isEdit }: any) {
         value={form?.description}
         onChange={handleChange("description")}
         style={styles.description}
+        multiline={true}
+        numberOfLines={4}
       />
       {errors?.description && (
         <Text style={styles.errorText}>{errors?.description}</Text>
       )}
 
-      <DropdownField
-        options={Constants.statuses}
-        label="Status"
-        value={form?.status}
-        onChange={handleChange("status")}
-      />
+      {!isEdit ? (
+        <DropdownField
+          options={Constants.statuses}
+          label="Status"
+          value={form?.status}
+          onChange={handleChange("status")}
+        />
+      ) : null}
+
       <DropdownField
         options={Constants.priority}
         label="Priority"

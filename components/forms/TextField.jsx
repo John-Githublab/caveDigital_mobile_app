@@ -21,7 +21,6 @@ const TextField = ({
         style={[style.root]}
         value={value}
         onChangeText={onChange}
-        multiline={true}
         {...restProps}
       />
     </View>

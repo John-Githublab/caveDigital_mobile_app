@@ -12,6 +12,7 @@ import { styles } from "./styles";
 import LocalStorage from "@/utils/LocalStorage";
 import ConfigAPIUrl from "@/constants/ConfigApiUrl";
 import APIRequest from "@/utils/ApiRequest";
+import { Context } from "@/provider/Authprovider";
 
 interface Form {
   email: string;
@@ -22,6 +23,7 @@ const Login = () => {
   const [form, setForm] = useState<Form>();
   const { errors, getErrors } = useError(validationSchema);
   const [showpassword, setShowPassword] = useState(true);
+  const { setIsAuthenticated, setUserDetails } = React.useContext(Context);
 
   const handleChange = (key: string, value: any, e?: any) => {
     const data = value || e?.target?.value;
@@ -45,9 +47,10 @@ const Login = () => {
     const response = await APIRequest.request("POST", ConfigAPIUrl.login, form);
 
     if (!response) return;
-
     const data: any = response?.data;
     const result = data?.result;
+    setIsAuthenticated(true);
+    setUserDetails(result);
     LocalStorage.storeData("token", data?.token);
     LocalStorage.storeData("user", result);
     redirectUser();
@@ -68,7 +71,7 @@ const Login = () => {
             placeholder="Email"
             keyboardType="email-address"
             value={form?.email}
-            onChangeText={(e) => handleChange("email", e)}
+            onChangeText={(e) => handleChange("email", e?.toLowerCase())}
           />
         </View>
         {errors?.email && <Text style={styles.errorText}>{errors?.email}</Text>}

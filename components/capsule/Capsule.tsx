@@ -10,7 +10,7 @@ interface StatusCapsule {
 const StatusCapsule = ({ children, color = "#E961611A" }: StatusCapsule) => {
   return (
     <View style={[styles.capsule, { backgroundColor: color }]}>
-      <Typography variant="small" style={{ color: "#E96161" }}>
+      <Typography variant="small" style={styles.text}>
         {children}
       </Typography>
     </View>
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     alignSelf: "flex-start",
   },
   text: {
-    color: "#fff",
+    color: "#E96161",
     fontWeight: "bold",
     textTransform: "capitalize",
   },

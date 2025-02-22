@@ -1,16 +1,22 @@
-import { View, Text } from "react-native";
-import React, { useContext, useEffect } from "react";
+import { useRouter, useSegments } from "expo-router";
+import React, { useContext, useEffect, useState } from "react";
 import { Context } from "./Authprovider";
-import { router } from "expo-router";
+import CenterLoader from "@/components/loader/CenterLoader";
 
 const PrivateProvider = ({ children }: any) => {
   const { isAuthenticated } = useContext(Context);
+  const router = useRouter();
+  const segments = useSegments();
+  const isNavigationReady = segments[0] === "(task)";
 
-  // useEffect(() => {
-  //   if (!isAuthenticated) router.push("/login");
-  // }, [isAuthenticated]);
+  useEffect(() => {
+    // check is the expo router is mounted
+    if (isNavigationReady && !isAuthenticated) {
+      router.replace("/login");
+    }
+  }, [isAuthenticated, isNavigationReady]);
 
-  return <>{children}</>;
+  return <>{isNavigationReady ? children : <CenterLoader />}</>;
 };
 
 export default PrivateProvider;

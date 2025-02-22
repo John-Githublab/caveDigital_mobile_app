@@ -55,6 +55,7 @@ const Signup = () => {
     const result = data?.result;
     toast("Successfully created User");
     setForm({});
+    handleNavigateTosignin();
   };
 
   return (
@@ -88,7 +89,7 @@ const Signup = () => {
             placeholder="Email"
             keyboardType="email-address"
             value={form?.email}
-            onChangeText={(e) => handleChange("email", e)}
+            onChangeText={(e) => handleChange("email", e?.toLowerCase())}
           />
         </View>
         {errors?.email && <Text style={styles.errorText}>{errors?.email}</Text>}

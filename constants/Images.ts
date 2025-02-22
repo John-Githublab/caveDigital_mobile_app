@@ -7,4 +7,5 @@ export default {
   add: require("@/assets/images/add.png"),
   details: require("@/assets/images/details.png"),
   react: require("@/assets/images/react-icon.png"),
+  noDataFound: require("@/assets/images/nodedatafound.png"),
 };

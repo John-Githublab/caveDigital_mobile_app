@@ -32,7 +32,7 @@ export const styles = StyleSheet.create({
     gap: 14,
   },
   description: {
-    height: 100,
+    // height: 100,
     backgroundColor: "white",
   },
   buttonmain: {

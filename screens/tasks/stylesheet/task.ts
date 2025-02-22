@@ -62,4 +62,14 @@ export const styles = StyleSheet.create({
   marginHr: {
     marginHorizontal: 22,
   },
+  taskContainer: {
+    height: "100%",
+    gap: 14,
+  },
+  card: {
+    backgroundColor: Colors.light.background,
+    width: "100%",
+    paddingHorizontal: 6,
+    paddingVertical: 0,
+  },
 });

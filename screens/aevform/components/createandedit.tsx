@@ -65,7 +65,7 @@ const Create = function ({ recordId, isEdit }: any) {
         <Text style={styles.errorText}>{errors?.description}</Text>
       )}
 
-      {!isEdit ? (
+      {isEdit ? (
         <DropdownField
           options={Constants.statuses}
           label="Status"
@@ -82,9 +82,7 @@ const Create = function ({ recordId, isEdit }: any) {
       />
       <View style={styles.buttonmain}>
         <Button onClick={handleSubmit}>
-          <Typography style={styles.button}>
-            {isEdit ? "Edit" : "Save"} Details
-          </Typography>
+          <Typography style={styles.button}>Save Details</Typography>
         </Button>
       </View>
     </View>

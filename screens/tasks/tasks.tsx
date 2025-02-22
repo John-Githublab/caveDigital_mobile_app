@@ -1,6 +1,9 @@
+import Button from "@/components/buttons/Button";
 import FloatingButton from "@/components/buttons/FloatingButton";
+import DataLoad from "@/components/loader/DataLoad";
 import Typography from "@/components/text/Text";
 import Images from "@/constants/Images";
+import { Context } from "@/provider/Authprovider";
 import Statics from "@/screens/tasks/components/Statics";
 import { router } from "expo-router";
 import React from "react";
@@ -9,24 +12,20 @@ import {
   RefreshControl,
   ScrollView,
   TouchableOpacity,
-  TouchableWithoutFeedback,
 } from "react-native-gesture-handler";
+import Greeting from "./components/Greeting";
 import TaskCard from "./components/TaskCard";
 import useTask from "./hooks/useTask";
 import { styles } from "./stylesheet/task";
-import { Context } from "@/provider/Authprovider";
-import { getGreeting } from "@/utils/Helpers";
-import DataLoad from "@/components/loader/DataLoad";
-import Button from "@/components/buttons/Button";
 
 const Tasks = () => {
   const { tasks, statics, getTaskDetails, loading, deleteRecord } =
     useTask(true);
 
   const navigateToEditPage = (id?: string) =>
-    router.push(`/(task)/create&edit?record=${id}`);
+    router.push(`/(task)/edit?record=${id}`);
 
-  const navigateToCreatePage = () => router.push(`/(task)/create&edit`);
+  const navigateToCreatePage = () => router.push(`/(task)/create`);
 
   const navigateToDetails = (id: string) => router.push(`/view?record=${id}`);
 
@@ -36,17 +35,7 @@ const Tasks = () => {
     <View style={styles.root}>
       <View style={styles.container}>
         <View style={styles.invite}>
-          <View>
-            <Typography variant="small" style={{ color: "white" }}>
-              {getGreeting()}
-            </Typography>
-            <Typography
-              variant="large"
-              style={{ color: "white", marginTop: 4 }}
-            >
-              {userDetails?.first_name}
-            </Typography>
-          </View>
+          <Greeting name={userDetails?.first_name} />
           <TouchableOpacity onPress={handleLogout} style={styles.logout__frame}>
             <Image style={styles.logout__icon} source={Images.logout} />
           </TouchableOpacity>
@@ -54,17 +43,15 @@ const Tasks = () => {
         <Statics statics={statics} />
       </View>
       <View style={styles.marginHr}>
-        <Typography
-          variant="medium"
-          style={{ marginTop: 42, marginBottom: 12 }}
-        >
+        <Typography variant="medium" style={styles.totalTask}>
           Total Tasks{" "}
-          <Typography style={{ color: "#868686" }}>
+          <Typography style={styles.count}>
             ( {statics?.total} Tasks )
           </Typography>
         </Typography>
         <ScrollView
-          style={styles.taskContainer}
+          alwaysBounceVertical={true}
+          scrollEnabled={true}
           contentContainerStyle={styles.taskContainer}
           refreshControl={
             <RefreshControl refreshing={loading} onRefresh={getTaskDetails} />
@@ -101,14 +88,12 @@ const Tasks = () => {
           ))}
         </ScrollView>
         {!loading && tasks?.length === 0 && (
-          <DataLoad message="Create some task " />
+          <DataLoad message="No data available" />
         )}
       </View>
       <FloatingButton onPress={navigateToCreatePage}>
-        <Image style={{ width: 24, height: 24 }} source={Images.add} />
-        <Typography style={{ color: "white", fontWeight: 700 }}>
-          Create
-        </Typography>
+        <Image style={styles.createImg} source={Images.add} />
+        <Typography style={styles.createText}>Create</Typography>
       </FloatingButton>
     </View>
   );

@@ -11,13 +11,20 @@ interface ListDetails {
 export interface List {
   lists: ListDetails[];
   textStyle?: TextStyle;
+  closePopover?: () => void;
 }
 
-const List = ({ lists, textStyle }: List) => {
+const List = ({ lists, textStyle, closePopover }: List) => {
+  const handlePress = (list: any) => {
+    return () => {
+      closePopover?.();
+      list?.onPress();
+    };
+  };
   return (
     <View style={styles.root}>
       {lists?.map((list, key) => (
-        <TouchableOpacity onPress={list?.onPress} key={list?.label}>
+        <TouchableOpacity onPress={handlePress(list)} key={list?.label}>
           <Typography style={[styles.label, textStyle]}>
             {list?.label}
           </Typography>

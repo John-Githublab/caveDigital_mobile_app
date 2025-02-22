@@ -1,9 +1,9 @@
-import React, { useMemo } from "react";
-import { Image, ImageBackground, View } from "react-native";
-import { styles } from "../stylesheet/task";
 import Typography from "@/components/text/Text";
 import Images from "@/constants/Images";
 import { Statics } from "@/types/Task";
+import React, { useMemo } from "react";
+import { Image, View } from "react-native";
+import { styles } from "../stylesheet/task";
 
 interface Props {
   statics?: Statics;
@@ -39,7 +39,7 @@ const StaticsUi = ({ statics }: Props) => {
             <Image source={value["background"]} style={styles.status_img} />
             <Typography
               variant="small"
-              style={{ color: "white", fontWeight: "600" }}
+              style={{ color: "white", fontWeight: "bold" }}
             >
               {value?.label}
             </Typography>

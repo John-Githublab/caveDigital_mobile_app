@@ -32,8 +32,11 @@ export const styles = StyleSheet.create({
     gap: 14,
   },
   description: {
-    // height: 100,
     backgroundColor: "white",
+    height: 100,
+    paddingHorizontal: 10,
+    textAlignVertical: "top",
+    paddingVertical: 10,
   },
   buttonmain: {
     flex: 1,

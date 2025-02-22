@@ -26,7 +26,7 @@ interface Form {
 const Signup = () => {
   const [form, setForm] = useState<Form>();
   const { errors, getErrors } = useError(validationSchema);
-  const [showpassword, setShowPassword] = useState(false);
+  const [showpassword, setShowPassword] = useState(true);
 
   const handleChange = (key: string, value: any, e?: any) => {
     const data = value || e?.target?.value;

@@ -30,6 +30,18 @@ export const styles = StyleSheet.create({
     width: 24,
     height: 24,
   },
+  totalTask: {
+    marginTop: 42,
+    marginBottom: 12,
+    fontWeight: "bold",
+  },
+  count: {
+    color: "#868686",
+  },
+  firstNameText: { color: "white", marginTop: 4 },
+  createImg: { width: 24, height: 24 },
+  createText: { color: "white", fontWeight: 700 },
+  greeting: { color: "white" },
   statics_parent: {
     backgroundColor: "white",
     // height: 150,
@@ -55,16 +67,16 @@ export const styles = StyleSheet.create({
     height: 90,
     flex: 1,
     position: "absolute",
-    // objectFit: "cover",
     borderRadius: 8,
-    // width: "auto",
   },
   marginHr: {
     marginHorizontal: 22,
+    flex: 1,
   },
   taskContainer: {
-    height: "100%",
     gap: 14,
+    flexGrow: 1,
+    paddingBottom: 10,
   },
   card: {
     backgroundColor: Colors.light.background,

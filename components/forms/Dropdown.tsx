@@ -21,10 +21,7 @@ const DropdownField: React.FC<DropdownFieldProps> = ({
   return (
     <View {...restProps}>
       <View style={styles.labelContainer}>
-        <Typography
-          variant="medium"
-          style={{ fontWeight: "normal", color: "black" }}
-        >
+        <Typography variant="medium" style={styles.text}>
           {label}
         </Typography>
       </View>
@@ -39,6 +36,7 @@ const DropdownField: React.FC<DropdownFieldProps> = ({
               key={option.value}
               label={option.label}
               value={option.value}
+              style={styles.pickerItem}
             />
           ))}
         </Picker>
@@ -49,8 +47,10 @@ const DropdownField: React.FC<DropdownFieldProps> = ({
 
 const styles = StyleSheet.create({
   dropdownContainer: {
-    borderRadius: 10,
     backgroundColor: "#F5F9FE",
+    overflow: "hidden",
+    elevation: 1,
+    borderRadius: 10,
   },
   labelContainer: {
     marginBottom: 8,
@@ -58,6 +58,14 @@ const styles = StyleSheet.create({
   picker: {
     color: "black",
     backgroundColor: "white",
+  },
+  text: {
+    fontWeight: "700",
+    color: "#323130",
+  },
+  pickerItem: {
+    fontSize: 14,
+    color: "#868686",
   },
 });
 

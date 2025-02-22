@@ -5,15 +5,8 @@ import Typography from "@/components/text/Text";
 import { Colors } from "@/constants/Colors";
 import Images from "@/constants/Images";
 import { getColorithStyle } from "@/utils/getColors";
-import React from "react";
-import {
-  Button,
-  Image,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import React, { useState } from "react";
+import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 import Popover from "react-native-popover-view";
 
 interface TaskCardBottom {
@@ -44,7 +37,11 @@ const BottomCard = (props: TaskCardBottom) => {
       <Typography variant="medium" style={{ color: Colors.light.tint }}>
         Status :{" "}
         <Typography
-          style={{ ...getColorithStyle(status), textTransform: "capitalize" }}
+          style={{
+            ...getColorithStyle(status),
+            textTransform: "capitalize",
+            fontWeight: "700",
+          }}
         >
           {status}
         </Typography>
@@ -55,7 +52,8 @@ const BottomCard = (props: TaskCardBottom) => {
 
 const TopCard = (props: TaskCardTop) => {
   const { title, description, actions } = props;
-
+  const [showPopover, setShowPopover] = useState(false);
+  const closePopver = () => setShowPopover(false);
   return (
     <>
       <Br />
@@ -64,14 +62,21 @@ const TopCard = (props: TaskCardTop) => {
           <Typography variant="medium" style={{ fontWeight: "700" }}>
             {title}
           </Typography>
-          <Typography variant="small" style={{ color: "#383838" }}>
+          <Typography
+            variant="small"
+            style={{ color: "#383838", textAlign: "justify" }}
+          >
             {description}
           </Typography>
         </View>
         <Popover
           arrowSize={{ width: 0, height: 0 }}
+          popoverStyle={styles.popoverStyle}
+          isVisible={showPopover}
+          onRequestClose={closePopver}
+          onCloseComplete={closePopver}
           from={
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => setShowPopover(true)}>
               <Image
                 style={styles.ellipsis}
                 source={Images.ellipsis}
@@ -80,7 +85,7 @@ const TopCard = (props: TaskCardTop) => {
             </TouchableOpacity>
           }
         >
-          <List lists={actions} />
+          <List lists={actions} closePopover={closePopver} />
         </Popover>
       </View>
     </>
@@ -111,6 +116,10 @@ const styles = StyleSheet.create({
   contents_area: {
     gap: 4,
     width: "95%",
+  },
+  popoverStyle: {
+    marginTop: -19,
+    marginLeft: -33,
   },
   ellipsis: {
     width: 24,

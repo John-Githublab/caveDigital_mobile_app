@@ -13,40 +13,46 @@ const TextField = ({
   return (
     <View>
       <View style={style.label}>
-        <Typography variant="medium">{label}</Typography>
+        <Typography style={style.text} variant="medium">
+          {label}
+        </Typography>
       </View>
-      <TextInput
-        placeholder={placeholder}
-        keyboardType={type || "default"}
-        style={[style.root]}
-        value={value}
-        onChangeText={onChange}
-        {...restProps}
-      />
+      <View style={style.textContainer}>
+        <TextInput
+          placeholder={placeholder}
+          keyboardType={type || "default"}
+          style={[style.root]}
+          value={value}
+          onChangeText={onChange}
+          {...restProps}
+        />
+      </View>
     </View>
   );
 };
 
 const style = StyleSheet.create({
   root: {
-    shadowColor: Colors.light.dark,
-    height: 45,
-    shadowOffset: {
-      width: 12,
-      height: 12,
-    },
-
-    shadowOpacity: 1.18,
-    shadowRadius: 10.59,
-    elevation: 2,
+    height: 48,
+    elevation: 1,
     borderRadius: 10,
     backgroundColor: "white",
     paddingHorizontal: 10,
+  },
+  textContainer: {
+    elevation: 1,
+    borderRadius: 10,
+    backgroundColor: "#F5F9FE",
+    overflow: "hidden",
   },
   label: {
     gap: 6,
     color: Colors.light.dark,
     marginBottom: 8,
+  },
+  text: {
+    fontWeight: "700",
+    color:"#323130"
   },
 });
 

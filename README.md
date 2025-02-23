@@ -33,7 +33,7 @@ Ensure you have the following installed:
 1. Clone the repository:
 
    ```sh
-   git clone https://github.com/your-username/task-management-app.git
+   git clone https://github.com/John-Githublab/caveDigital_mobile_app.git
    cd task-management-app
    ```
 

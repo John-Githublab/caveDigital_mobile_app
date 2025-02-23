@@ -93,6 +93,7 @@ const Forgotpassword = () => {
                 keyboardType="email-address"
                 value={form?.email}
                 onChangeText={handleChange("email")}
+                editable={!form?.triggeredMail}
               />
             </View>
             {errors?.email && (

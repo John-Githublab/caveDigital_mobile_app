@@ -81,7 +81,7 @@ Ensure you have the following installed:
 
 ### Environment Variables
 
-Create a `.env` file in the root directory and add the necessary environment variables, such as MongoDB connection strings.
+Create a `.env` file in the root directory and add the necessary environment variables, such as server url.
 
 ## Project Structure
 
@@ -128,4 +128,4 @@ This project is licensed under the MIT License.
 
 ## Contact
 
-For any inquiries, reach out to `john986310@example.com`. Happy coding! 🚀
+For any inquiries, reach out to `john986310@gmail.com`. Happy coding! 🚀

@@ -25,7 +25,9 @@ const Create = function ({ recordId, isEdit }: any) {
     priority: "low",
   });
   const { errors, getErrors } = useError(validationSchema);
-  const { task, loading, sendToServer } = useTaskForm(isEdit ? recordId : null);
+  const { task, loading, sendToServer, isSubmit } = useTaskForm(
+    isEdit ? recordId : null
+  );
 
   useEffect(() => {
     // once gets the data if the record is found sets to the state
@@ -85,7 +87,7 @@ const Create = function ({ recordId, isEdit }: any) {
         required={true}
       />
       <View style={styles.buttonmain}>
-        <Button onClick={handleSubmit}>
+        <Button isLoading={isSubmit} disabled={isSubmit} onClick={handleSubmit}>
           <Typography style={styles.button}>Save Details</Typography>
         </Button>
       </View>

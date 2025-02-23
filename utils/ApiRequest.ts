@@ -11,11 +11,16 @@ interface RequestConfig extends RequestInit {
   headers: Record<string, string>;
 }
 
+interface Headers {
+  token?: string;
+}
+
 const APIRequest = {
   request: async function (
     method: string,
     url: string,
-    body: string | object = ""
+    body: string | object = "",
+    headers?: Headers
   ): Promise<ApiResponse | null> {
     let config: RequestConfig = {
       method: method,
@@ -26,9 +31,8 @@ const APIRequest = {
       credentials: "include",
     };
 
-    if (await LocalStorage.getData("token")) {
-      config.headers.authToken = (await LocalStorage.getData("token")) || "";
-    }
+    config.headers.authToken =
+      headers?.token || (await LocalStorage.getData("token")) || "";
 
     if (body !== "") {
       config = {

@@ -13,6 +13,29 @@ const validationSchema: Record<string, FieldValidation> = {
       },
     ],
   },
+  otp: {
+    validateOnDataFound: true,
+    required: {
+      value: true,
+      message: "OTP is a required field",
+    },
+    minChar: {
+      value: 6,
+      message: "Minimum 6 charecters is required! ",
+    },
+  },
+  password: {
+    validateOnDataFound: true,
+    required: {
+      value: true,
+      message: "Password is a required field",
+    },
+    validators: [
+      {
+        validate: validators?.getPasswordError,
+      },
+    ],
+  },
 };
 
 export default validationSchema;

@@ -8,6 +8,10 @@ const useError = (schema: Record<string, FieldValidation>) => {
     const errorsCopy: any = { ...errors };
     Object.keys(schema)?.forEach((key: string) => {
       const element = schema[key];
+      // this is to verify if data is found then go to validate else return
+      if (element?.validateOnDataFound) {
+        if (!state?.[key]) return;
+      }
       // required field validation checks when any error comes need to return o doesnt go for next checking
       if (element?.required?.value) {
         errorsCopy[key] = state?.[key] ? "" : element?.required?.message;

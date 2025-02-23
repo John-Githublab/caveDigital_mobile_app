@@ -9,6 +9,7 @@ type Validator = {
 };
 
 export type FieldValidation = {
+  validateOnDataFound?: boolean; // only validates when valid data is found in state
   required: ValidationRule;
   minChar?: ValidationRule;
   maxChar?: ValidationRule;

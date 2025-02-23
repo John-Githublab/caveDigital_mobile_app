@@ -23,7 +23,9 @@ SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
   const colorScheme = useColorScheme();
   const [loaded] = useFonts({
-    Mulish: require("../assets/fonts/Mulish-VariableFont_wght.ttf"),
+    MulishBold: require("../assets/fonts/Mulish-Bold.ttf"),
+    MulishRegular: require("../assets/fonts/Mulish-Regular.ttf"),
+    MulishMedium: require("../assets/fonts/Mulish-Medium.ttf"),
   });
 
   useEffect(() => {

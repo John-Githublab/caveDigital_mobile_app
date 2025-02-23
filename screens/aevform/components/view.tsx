@@ -40,10 +40,8 @@ const viewform = ({ recordId }: any) => {
           <Typography variant="medium" style={{ fontWeight: "700" }}>
             {task?.title}
           </Typography>
-          <ScrollView>
-            <Typography variant="small" style={{ color: "#383838" }}>
-              {task?.description}
-            </Typography>
+          <ScrollView showsVerticalScrollIndicator={false}>
+            <Typography variant="small">{task?.description}</Typography>
           </ScrollView>
         </View>
       </View>

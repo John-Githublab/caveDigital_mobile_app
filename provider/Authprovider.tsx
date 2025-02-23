@@ -48,7 +48,7 @@ const Authprovider = ({ children }: any) => {
     await LocalStorage.removeData("token");
     setUserDetails(null);
     toast("Logged out successfully");
-    router.push("/login");
+    router.replace("/login");
   };
 
   const handleLogout = () => {

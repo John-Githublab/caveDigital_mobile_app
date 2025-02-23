@@ -7,6 +7,8 @@ class ConfigAPIUrl {
   static islogin = this.baseUrl + "/islogin"; //get
   static tasks = this.baseUrl + "/tasks";
   static triggerMail = this.baseUrl + "/trigger/email";
+  static verifyOtp = this.baseUrl + "/verify/otp"; //post
+  static updatePassword = this.baseUrl + "/auth/password/update" //post
 }
 
 export default ConfigAPIUrl;

@@ -25,13 +25,13 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: "400" as const,
     lineHeight: 18,
-    fontFamily: "Mulish",
+    fontFamily: "MulishRegular",
   },
   medium: {
     fontSize: 16,
     fontWeight: "500" as const,
     lineHeight: 22,
-    fontFamily: "Mulish",
+    fontFamily: "MulishMedium",
   },
   large: {
     fontSize: 24,
